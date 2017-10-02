@@ -1,54 +1,53 @@
-ready=prompt("Author, tell filler to leave.");
-// create arrays
-var sentence = [];
-var replacements = [];
-
-// add sentence words
-alert("Last word is punctuation mark ending sentence. Stop entering via '^'");
-
-do {
-	nextWord = prompt("Next word?");
-	if (nextWord != "^") {
-		sentence.push(nextWord);
-		}
-	}
-while (nextWord != "^");
-// End add sentence words
-
-// show sentence
-var sentenceString = sentence.join(' ');
-alert("Your sentence is: "+sentenceString.toString());
-// End show sentence
-
-// define replacements
+// initialize variables
+var sentence=[];
+var replacements=[];
+var index=0;
+// initialize users
+alert ("Filler, Go Away.");
+alert ("Enter after each word, end with Shift+6(^)");
+// fill sentence
+populate(index,sentence,"word");
+alert (sentence);
 index=0;
-do {
-	replacements[index] = prompt("Next position?");
-	if (replacements[index] != "^") {
-		sentence[replacements[index]] = "["+prompt("Next part of speech?")+"]";
-	}
-	index++;
-}
-while (replacements[index-1] != "^");
-// End define replacements
-
-// Author checks sentence
-var sentenceString = sentence.join(' ');
-alert("Sentence is now: "+sentenceString.toString());
-
-// switch places
-alert(replacements[index-1]);
-ready=prompt("Author, go get filler, then YOU leave.");
-
+// specify positions
+populate(index,replacements,"position");
+alert (replacements);
+// enter parts of speech
+index=0;
+replace(index,sentence,replacements,"part of speech");
+alert (sentence);
+// switch people
+// train filler
+alert("Enter words that match the part of speech shown");
 // enter replacement words
 index=0;
-do {
-	sentence[replacements[index]]=prompt("Enter a "+sentence[replacements[index]]+".");
-	index++;
-}
-while (replacements[index]!= "^");
-
-ready=prompt("All replacements entered. Go get Author.");
-
+replace(index, sentence, replacements, "new word");
+// show the sentence
+alert("Go get the author to see the sentence!");
 sentenceString = sentence.join(' ');
 alert(sentenceString.toString());
+//end
+
+
+function populate(sindex,sarray,label){
+	do {
+		sarray[sindex]=prompt("Next "+label+"?");
+		sindex = sindex+1;
+	}
+	while (sarray[sindex-1]!="^");
+	console.log(sarray);
+	sarray.splice(-1,1);
+	return sarray;
+}
+
+function replace (sindex,sarray,rarray,label) {
+	for (sindex = 0; sindex < rarray.length; sindex++) {
+		if (label=="new word"){
+			sarray[rarray[sindex]] = prompt("Provide a "+sarray[rarray[sindex]]+" here: ");
+		}
+		else {
+			sarray[rarray[sindex]] = prompt("next "+label+"?");
+		}
+	}
+	return sarray;
+}
