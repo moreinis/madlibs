@@ -1,3 +1,4 @@
+// verbose version
 // initialize variables
 var sentence=[];
 var replacements=[];
