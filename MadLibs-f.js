@@ -1,38 +1,45 @@
-var sentence = [];
+// initialize variables
+var sentence = []; // [] means array
 var index = 0;
 var replacements = [];
-//Input the sentence
-populate(sentence, "Word ",0);
 
-//Specify the replacements positions
-populate(replacements, "Position ",0);
+// Main Code
 
-//Specify parts of speech
-swap(sentence,replacements,"Enter the PoS for ",0);
+	// Input the sentence (author)
+	sentence=populate(sentence, "Word "); // populate is the name of the function we are calling
 
-//Get the replacements
-swap(sentence,replacements,"Enter a ",0);
+	// Specify the replacements positions (author)
+	replacements=populate(replacements, "Position ");
 
-//
-sentence.splice(-1,1);
-sentenceString = sentence.join(' ');
-alert(sentenceString.toString());
+	// Specify parts of speech (author)
+	sentence=swap(sentence,replacements,"Enter the PoS for ",0);
 
-function populate(sarray,sprompt,index){
+	// Get the replacements from the filler
+	sentence=swap(sentence,replacements,"Enter a ",0);
+
+	// Output the sentence without the ^ or commas
+	sentence.splice(-1,1);
+	sentenceString = sentence.join(' ');
+	alert(sentenceString.toString());
+
+// Define Functions
+
+// Build Sentence and Replacements Arrays
+function populate(myArray,sprompt){
+	index=0;
 	do {
-	sarray[index] = prompt(sprompt + index + ":");
+	myArray[index] = prompt(sprompt + index + ":");
 	index++;
 	}
-	while(sarray[index - 1] != "^")
-	return sarray;
+	while(myArray[index - 1] != "^")
+	return myArray;
 }
 
+// Swap itemes in Sentence Array for Parts of Speech, New Words
 function swap(sarray,rarray,sprompt,index){
-for (index = 0; index < rarray.length - 1; index++){
-	sarray[rarray[index]]= prompt(sprompt + sarray[rarray[index]] + ".");
-}
+	index=0;
+	for (index = 0; index < rarray.length - 1; index++){
+		sarray[rarray[index]]= prompt(sprompt + sarray[rarray[index]] + ".");
+	}
 	return sarray;
 }
-
-
-
